@@ -4,12 +4,9 @@ import mine.school2.dataobject.Student;
 import mine.school2.repository.StudentRepository;
 import mine.school2.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.net.ContentHandler;
 import java.text.SimpleDateFormat;
 import java.util.List;
 

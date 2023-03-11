@@ -3,12 +3,10 @@ package mine.school2.dataobject;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.Entity;
-import java.math.BigInteger;
 
 @Entity
 @DynamicUpdate
@@ -23,7 +21,7 @@ public class Student {
 
     private Integer status = 0;
     private String number;
-    private  String description;
+    private String description;
 
     public Student(String name, Integer sex, String class_grade) {
         this.name = name;
