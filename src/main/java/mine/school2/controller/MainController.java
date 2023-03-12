@@ -29,7 +29,7 @@ public class MainController {
     //    删除
     @GetMapping(path = "del")
     public @ResponseBody String delNewStudent(@RequestParam Integer id) {
-        studentService.deleteById(id);
+        studentService.remove(id);
         return "Deleted";
     }
 

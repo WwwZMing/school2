@@ -1,35 +1,32 @@
 package mine.school2.dataobject;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @DynamicUpdate
 @Data
+@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Integer sex;
-    private String class_grade;
+
+    @Column(name = "class_grade")
+    private String classGrade;
 
     private Integer status = 0;
     private String number;
     private String description;
 
-    public Student(String name, Integer sex, String class_grade) {
+    public Student(String name, Integer sex, String classGrade) {
         this.name = name;
         this.sex = sex;
-        this.class_grade = class_grade;
-    }
-
-    public Student() {
-
+        this.classGrade = classGrade;
     }
 }

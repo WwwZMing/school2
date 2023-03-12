@@ -9,7 +9,7 @@ import java.util.List;
 public interface StudentService {
     Student createOne(String name, String classGrade, Integer sex);
 
-    void deleteById(Integer id);
+    void remove(Integer id);
 
     Student updateOne(Integer id, String name, String classGrade, Integer sex);
 

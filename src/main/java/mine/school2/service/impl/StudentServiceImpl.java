@@ -6,6 +6,7 @@ import mine.school2.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -25,16 +26,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void remove(Integer id) {
         studentRepository.deleteById(id);
     }
 
     @Override
     public Student updateOne(Integer id, String name, String classGrade, Integer sex) {
-        Student s = studentRepository.findById(id).get();
+        Student s = studentRepository.findById(id).orElse(null);
+        Assert.notNull(s,"object is null");
         s.setSex(sex);
         s.setName(name);
-        s.setClass_grade(classGrade);
+        s.setClassGrade(classGrade);
         return s;
     }
 
