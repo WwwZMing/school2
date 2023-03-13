@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.swing.text.html.Option;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -18,11 +20,10 @@ public class StudentServiceImpl implements StudentService {
 
     //新增
     @Override
-    public Student createOne(String name, String classGrade, Integer sex) {
+    public void createOne(Student student) {
         String number = new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
-        Student s = new Student(name, sex, classGrade);
-        s.setNumber(number);
-        return s;
+        student.setNumber(number);
+        studentRepository.save(student);
     }
 
     @Override
@@ -31,13 +32,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student updateOne(Integer id, String name, String classGrade, Integer sex) {
-        Student s = studentRepository.findById(id).orElse(null);
+    public void updateOne(Student student) {
+        Student s = studentRepository.findById(student.getId()).orElse(null);
         Assert.notNull(s,"object is null");
-        s.setSex(sex);
-        s.setName(name);
-        s.setClassGrade(classGrade);
-        return s;
+        s.setName(Optional.ofNullable(student.getName()).orElse(s.getName()));
+        s.setSex(Optional.ofNullable(student.getSex()).orElse(s.getSex()));
+        s.setStatus(Optional.ofNullable(student.getStatus()).orElse(s.getStatus()));
+        s.setDescription(Optional.ofNullable(student.getDescription()).orElse(s.getDescription()));
+        s.setClassGrade(Optional.ofNullable(student.getClassGrade()).orElse(s.getClassGrade()));
+        studentRepository.save(s);
     }
 
     @Override
@@ -48,10 +51,5 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findByNameIn(List<String> nameList) {
         return studentRepository.findByNameIn(nameList);
-    }
-
-    @Override
-    public Student save(Student s) {
-        return studentRepository.save(s);
     }
 }

@@ -20,9 +20,8 @@ public class MainController {
 
     //    新增
     @PostMapping(path = "add")
-    public @ResponseBody String addNewStudent(@RequestParam String name, @RequestParam String classGrade, @RequestParam Integer sex) {
-        Student s = studentService.createOne(name, classGrade, sex);
-        studentService.save(s);
+    public @ResponseBody String addNewStudent(@RequestBody Student student) {
+        studentService.createOne(student);
         return "Saved";
     }
 
@@ -35,10 +34,8 @@ public class MainController {
 
     //    更新
     @PostMapping(path = "/update")
-    public @ResponseBody String updateStudent(@RequestParam Integer id, @RequestParam String name, @RequestParam String classGrade, @RequestParam Integer sex) {
-        Student s = studentService.updateOne(id, name, classGrade, sex);
-        studentService.save(s);
-        System.out.println(s);
+    public @ResponseBody String updateStudent(@RequestBody Student student) {
+        studentService.updateOne(student);
         return "Update Success";
     }
 
