@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import javax.swing.text.html.Option;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void updateOne(Student student) {
         Student s = studentRepository.findById(student.getId()).orElse(null);
-        Assert.notNull(s,"object is null");
+        Assert.notNull(s, "object is null");
         s.setName(Optional.ofNullable(student.getName()).orElse(s.getName()));
         s.setSex(Optional.ofNullable(student.getSex()).orElse(s.getSex()));
         s.setStatus(Optional.ofNullable(student.getStatus()).orElse(s.getStatus()));
