@@ -2,6 +2,7 @@ package mine.school2.dataobject;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mine.school2.enums.StudentStatusEnum;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Student {
     @Column(name = "class_grade")
     private String classGrade;
 
-    private Integer status = 0;
+    private Integer status = StudentStatusEnum.internal.getCode();
     private String number;
     private String description;
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 
 @Controller
+@RestController//替代繁复的responsebody
 @RequestMapping(path = "demo")
 public class MainController {
     @Autowired
@@ -20,36 +21,36 @@ public class MainController {
 
     //    新增
     @PostMapping(path = "add")
-    public @ResponseBody String addNewStudent(@RequestBody Student student) {
+    public String addNewStudent(@RequestBody Student student) {
         studentService.createOne(student);
         return "Saved";
     }
 
     //    删除
     @GetMapping(path = "del")
-    public @ResponseBody String delNewStudent(@RequestParam Integer id) {
+    public String delNewStudent(@RequestParam Integer id) {
         studentService.remove(id);
         return "Deleted";
     }
 
     //    更新
     @PostMapping(path = "/update")
-    public @ResponseBody String updateStudent(@RequestBody Student student) {
+    public String updateStudent(@RequestBody Student student) {
         studentService.updateOne(student);
         return "Update Success";
     }
 
     //    分页查询
     @GetMapping(path = "/all")
-    public @ResponseBody List<Student> getAllStudent(@RequestParam Integer a) {
+    public List<Student> getAllStudent(@RequestParam Integer a) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(a, 20, sort);
-        return studentService.findAll(pageable);
+        return studentService.findAll(pageable).getContent();
     }
 
     //    按名字查询
     @GetMapping(path = "/find")
-    public @ResponseBody List<Student> findStudentByName(@RequestParam List<String> nameList) {
+    public List<Student> findStudentByName(@RequestParam List<String> nameList) {
         return studentService.findByNameIn(nameList);
     }
 }

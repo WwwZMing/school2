@@ -4,6 +4,7 @@ import mine.school2.dataobject.Student;
 import mine.school2.repository.StudentRepository;
 import mine.school2.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -43,8 +44,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findAll(Pageable pageable) {
-        return studentRepository.findAll(pageable).getContent();
+    public Page<Student> findAll(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 
     @Override
